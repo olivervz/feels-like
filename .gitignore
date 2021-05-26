@@ -16,6 +16,8 @@ yarn.lock
 
 # misc
 .DS_Store
+package-lock.json
+/client/.env
 .env.local
 .env.development.local
 .env.test.local
