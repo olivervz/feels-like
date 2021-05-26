@@ -22,6 +22,9 @@ const Main = () => {
   const makeYellow = () => {
     setBackgroundState({...backgroundState, color: 'yellow'})
   }
+  const makePurple= () => {
+    setBackgroundState({...backgroundState, color: 'purple'})
+  }
   const handleChange = (prop) => (event) => {
     setBackgroundState({...backgroundState, userInput: event.target.value})
   }
