@@ -6,13 +6,7 @@ import Input from '@material-ui/core/Input';
 import { useState, useEffect } from 'react'
 
 const Main = () => {
-
-  const [backgroundState, setBackgroundState] = useState({
-    color: 'white',
-    userInput: '',
-    userInputInvalid: false,
-  }) 
-
+  const [searchState, setSearchState] = useState(false)
   const [weatherState, setWeatherState] = useState({
     loaded: false,
     city: null,
@@ -37,6 +31,7 @@ const Main = () => {
   const parseWeatherData = () => {
     console.log(weatherState.weatherData)
     const city = weatherState.weatherData.name
+    const country = weatherState.weatherData.sys.country
     const temperatureK = weatherState.weatherData.main.temp
     const temperatureF = kelvinToFahrenheit(temperatureK)
     const temperatureC = kelvinToCelsius(temperatureK)
@@ -52,6 +47,7 @@ const Main = () => {
     setWeatherState({...weatherState, 
       loaded: true,
       city: city,
+      country: country,
       temperatureK: temperatureK,
       temperatureF: temperatureF,
       temperatureC: temperatureC,
@@ -80,11 +76,16 @@ const Main = () => {
 
     const response = await fetch(address)
     const weatherData = await response.json()
+    if (weatherData.cod === "404") {
+      setSearchState(true)
+      return
+    }
+    setSearchState(false)
     setWeatherState({...weatherState, weatherData: weatherData})
   }
 
   const weatherDisplay = <div>
-    <h1>Weather for {weatherState.city}</h1>
+    <h1>Weather for {weatherState.city} {weatherState.country}</h1>
     <h1>{weatherState.temperatureF}°F</h1>
     <h2>Feels Like {weatherState.feelsLikeF}°F</h2>
     <h2>{weatherState.humidity}% Humidity</h2>
@@ -92,14 +93,21 @@ const Main = () => {
     <h2>{weatherState.cloudiness}% Cloud Coverage</h2>
   </div>
 
+  const keyPress = (event) => {
+    if(event.keyCode == 13){
+      fetchWeather(event.target.value)
+    }
+  }
+
   return (
     <>
       <CssBaseline />
       <Container maxWidth='xl' disableGutters={true}>
-        <Typography component="div" style={{ backgroundColor: backgroundState.color, height: '100vh' }}>
+        <Typography component="div" style={{ backgroundColor: 'white', height: '100vh' }}>
           <Button variant='outlined' onClick={() => fetchWeather('boston')}>Display Weather Boston</Button>
           <Button variant='outlined' onClick={() => fetchWeather('winnipeg')}>Display Weather Boston</Button>
           <Button variant='outlined' onClick={() => fetchWeather('manhattan')}>Display Weather Boston</Button>
+          <Input id="filled-basic" label="Filled" variant="filled" onKeyDown={keyPress} error={searchState}/>
         {weatherState.loaded &&
           weatherDisplay
         }
