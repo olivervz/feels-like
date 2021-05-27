@@ -5,14 +5,14 @@ import Container from '@material-ui/core/Container'
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 
-const Location = ({ selected, data, onSelect, onDelete }) => {
+const Location = ({ selected, data, name, address, key, id, onSelect, onDelete }) => {
 
   return (
     <div>
       <Container disableGutters={true}>
         <Typography component="div" style={{ backgroundColor: selected ? '#e6efff': '#f2f7ff'}}>
-          <Button onClick={() => onSelect(data.name)}>{data.name}</Button> 
-          <IconButton onClick={() => onDelete(data.name)} aria-label="delete">
+          <Button onClick={() => onSelect(id)}>{name}</Button> 
+          <IconButton onClick={() => onDelete(id)} aria-label="delete">
             <DeleteIcon />
           </IconButton>
         </Typography>

@@ -41,7 +41,7 @@ const Heading = ({switchState, onChange}) => {
 
   return (
     <div style={{backgroundColor: '#dde3f0', textAlign: 'center'}}>
-      <h1>Test</h1>
+      <h1>Weather</h1>
       <Typography component="div">
         <Grid component="label" container alignItems="center" spacing={1}>
           <Grid item>°F</Grid>

@@ -2,12 +2,13 @@ import React from 'react'
 import WeatherDisplay from './WeatherDisplay'
 import { useState, useEffect } from 'react'
 
-const Weather = ({ fahrenheit, weatherData }) => {
+const Weather = ({ fahrenheit, weatherData, name, address }) => {
   const [newWeatherState, setNewWeatherState] = useState(weatherData)
   const [weatherState, setWeatherState] = useState({
     loaded: false,
     weatherData: null,
     city: null,
+    address: null,
     country: null,
     temperatureK: null,
     temperatureF: null,
@@ -31,25 +32,25 @@ const Weather = ({ fahrenheit, weatherData }) => {
   }
 
   const parseWeatherData = () => {
-    const city = weatherData.name
-    const country = weatherData.sys.country
-    const temperatureK = Math.trunc(weatherData.main.temp)
+    const city = name
+    const cityaddress = address
+    const temperatureK = Math.trunc(weatherData.current.temp)
     const temperatureF = Math.trunc(kelvinToFahrenheit(temperatureK))
     const temperatureC = Math.trunc(kelvinToCelsius(temperatureK))
-    const feelsLikeK = Math.trunc(weatherData.main.feels_like)
+    const feelsLikeK = Math.trunc(weatherData.current.feels_like)
     const feelsLikeF = Math.trunc(kelvinToFahrenheit(feelsLikeK))
     const feelsLikeC = Math.trunc(kelvinToCelsius(feelsLikeK))
-    const humidity = weatherData.main.humidity
-    const windSpeed = weatherData.wind.speed
-    const cloudiness = weatherData.clouds.all
-    // const rainVolume = weatherData.rain
-    const weather = weatherData.weather[0].description
+    const humidity = weatherData.current.humidity
+    const windSpeed = weatherData.current.wind_speed
+    const cloudiness = weatherData.current.clouds
+    const uvi = weatherData.current.uvi
+    const weather = weatherData.current.weather[0].description
 
     setWeatherState({...weatherState, 
       loaded: true,
       weatherData: weatherData,
       city: city,
-      country: country,
+      address: cityaddress,
       temperatureK: temperatureK,
       temperatureF: temperatureF,
       temperatureC: temperatureC,
@@ -59,7 +60,7 @@ const Weather = ({ fahrenheit, weatherData }) => {
       humidity: humidity,
       windSpeed: windSpeed,
       cloudiness: cloudiness,
-      // rainVolume: rainVolume,
+      uvi: uvi,
       weather: weather
     })
   }
@@ -68,7 +69,7 @@ const Weather = ({ fahrenheit, weatherData }) => {
     parseWeatherData()
   }, [newWeatherState])
 
-  if (weatherData.name != newWeatherState.name) {
+  if (weatherData.lat !== newWeatherState.lat || weatherData.lon !== newWeatherState.lon) {
     setNewWeatherState(weatherData)
   }
 
