@@ -4,7 +4,6 @@ import { Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container'
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
-import { useState, useEffect } from 'react'
 
 const Location = ({ selected, data, onSelect, onDelete }) => {
 

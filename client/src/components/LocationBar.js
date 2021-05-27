@@ -2,12 +2,13 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Input from '@material-ui/core/Input';
 import Location from './Location'
-import { useState, useEffect } from 'react'
+import Weather from './Weather'
+import { useState } from 'react'
 
 const LocationBar = () => {
   const [locationsState, setLocationsState] = useState([])
   const [searchState , setSearchState] = useState(false)
-  const [selectedLocation, setSelectedLocation] = useState('')
+  const [selectedLocation, setSelectedLocation] = useState(null)
 
 
   const fetchWeather = async (city) => {
@@ -22,28 +23,34 @@ const LocationBar = () => {
       return
     }
     setSearchState(false)
-    // setWeatherState({...weatherState, weatherData: weatherData})
     setLocationsState([...locationsState, weatherData])
   }
 
   // Select the specified Location
   const onClick = (loc) => {
-    setSelectedLocation(loc)
+    locationsState.forEach((location) => {
+      if (location.name === loc) {
+        setSelectedLocation(location)
+        return
+      }
+    })
   }
 
   // Delete the Location
   const onDelete = (loc) => {
-    setLocationsState(locationsState.filter((location) => location.name != loc))
+    setLocationsState(locationsState.filter((location) => location.name !== loc))
+    if (selectedLocation.name === loc) {
+      setSelectedLocation(null)
+    }
   }
 
   // Create a new Location
   const keyPress = (event) => {
-    if(event.keyCode == 13){
+    if(event.keyCode === 13){
       fetchWeather(event.target.value)
     }
   }
-
-  console.log(locationsState)
+  
   return (
     <div>
       <Grid spacing={3}>
@@ -51,13 +58,16 @@ const LocationBar = () => {
           <Grid container justify='center' spacing={0}>
             <>
               {locationsState.map((location) => (
-                <Location selected={location.name === selectedLocation ? true : false}data={location} onSelect={onClick} onDelete={onDelete}/>
+                <Location selected={selectedLocation !== null && location.name === selectedLocation.name ? true : false}data={location} onSelect={onClick} onDelete={onDelete}/>
               ))}
             </>
             <Input id="filled-basic" label="Filled" variant="filled" onKeyDown={keyPress} error={searchState}/>
           </Grid>
         </Grid>
       </Grid>
+      <>
+      {selectedLocation === null ? null : <Weather weatherData={selectedLocation}/>}
+      </>
     </div>
   )
 }
