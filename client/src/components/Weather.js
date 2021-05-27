@@ -42,7 +42,7 @@ const Weather = ({ weatherData }) => {
     const humidity = weatherData.main.humidity
     const windSpeed = weatherData.wind.speed
     const cloudiness = weatherData.clouds.all
-    const rainVolume = weatherData.rain
+    // const rainVolume = weatherData.rain
     const weather = weatherData.weather[0].description
 
     setWeatherState({...weatherState, 
@@ -59,7 +59,7 @@ const Weather = ({ weatherData }) => {
       humidity: humidity,
       windSpeed: windSpeed,
       cloudiness: cloudiness,
-      rainVolume: rainVolume,
+      // rainVolume: rainVolume,
       weather: weather
     })
   }
