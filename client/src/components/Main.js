@@ -3,6 +3,7 @@ import { Typography } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Input from '@material-ui/core/Input';
+import LocationBar from './LocationBar'
 import { useState, useEffect } from 'react'
 
 const Main = () => {
@@ -104,13 +105,14 @@ const Main = () => {
       <CssBaseline />
       <Container maxWidth='xl' disableGutters={true}>
         <Typography component="div" style={{ backgroundColor: 'white', height: '100vh' }}>
-          <Button variant='outlined' onClick={() => fetchWeather('boston')}>Display Weather Boston</Button>
+          <LocationBar />
+          {/* <Button variant='outlined' onClick={() => fetchWeather('boston')}>Display Weather Boston</Button>
           <Button variant='outlined' onClick={() => fetchWeather('winnipeg')}>Display Weather Boston</Button>
           <Button variant='outlined' onClick={() => fetchWeather('manhattan')}>Display Weather Boston</Button>
           <Input id="filled-basic" label="Filled" variant="filled" onKeyDown={keyPress} error={searchState}/>
         {weatherState.loaded &&
           weatherDisplay
-        }
+        } */}
         </Typography>
       </Container>
     </>
