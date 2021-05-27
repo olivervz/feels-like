@@ -9,7 +9,7 @@ const Main = () => {
     <>
       <CssBaseline />
       <Container maxWidth='xl' disableGutters={true}>
-        <Typography component="div" style={{ backgroundColor: 'white', height: '100vh' }}>
+        <Typography component="div" style={{backgroundColor: '#f2f7ff', height: '100vh' }}>
           <LocationBar />
         </Typography>
       </Container>

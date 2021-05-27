@@ -15,6 +15,8 @@ const LocationBar = () => {
 
     const API_KEY = process.env.REACT_APP_OPEN_WEATHER_MAP_KEY
     const address = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`
+    // const address2 = `http://api.openweathermap.org/data/2.5/onecall?q=${city}&appid=${API_KEY}`
+    // const address2 = `https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=${API_KEY}`
 
     const response = await fetch(address)
     const weatherData = await response.json()
@@ -39,7 +41,7 @@ const LocationBar = () => {
   // Delete the Location
   const onDelete = (loc) => {
     setLocationsState(locationsState.filter((location) => location.name !== loc))
-    if (selectedLocation.name === loc) {
+    if (selectedLocation !== null && selectedLocation.name === loc) {
       setSelectedLocation(null)
     }
   }

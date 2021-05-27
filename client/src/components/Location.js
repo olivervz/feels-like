@@ -10,7 +10,7 @@ const Location = ({ selected, data, onSelect, onDelete }) => {
   return (
     <div>
       <Container disableGutters={true}>
-        <Typography component="div" style={{ backgroundColor: selected ? 'red': 'blue'}}>
+        <Typography component="div" style={{ backgroundColor: selected ? '#e6efff': '#f2f7ff'}}>
           <Button onClick={() => onSelect(data.name)}>{data.name}</Button> 
           <IconButton onClick={() => onDelete(data.name)} aria-label="delete">
             <DeleteIcon />
