@@ -5,7 +5,8 @@ import Location from './Location'
 import Weather from './Weather'
 import { useState } from 'react'
 
-const LocationBar = () => {
+const LocationBar = ({fahrenheit}) => {
+  console.log(fahrenheit, 'locationbar')
   const [locationsState, setLocationsState] = useState([])
   const [searchState , setSearchState] = useState(false)
   const [selectedLocation, setSelectedLocation] = useState(null)
@@ -68,7 +69,7 @@ const LocationBar = () => {
         </Grid>
       </Grid>
       <>
-      {selectedLocation === null ? null : <Weather weatherData={selectedLocation}/>}
+      {selectedLocation === null ? null : <Weather fahrenheit={fahrenheit} weatherData={selectedLocation}/>}
       </>
     </div>
   )

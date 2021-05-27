@@ -3,14 +3,13 @@ import { Typography } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import LocationBar from './LocationBar'
 
-const Main = () => {
-
+const Main = ({fahrenheit}) => {
   return (
     <>
       <CssBaseline />
       <Container maxWidth='xl' disableGutters={true}>
         <Typography component="div" style={{backgroundColor: '#f2f7ff', height: '100vh' }}>
-          <LocationBar />
+          <LocationBar fahrenheit={fahrenheit}/>
         </Typography>
       </Container>
     </>

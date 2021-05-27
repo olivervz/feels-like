@@ -2,7 +2,7 @@ import React from 'react'
 import WeatherDisplay from './WeatherDisplay'
 import { useState, useEffect } from 'react'
 
-const Weather = ({ weatherData }) => {
+const Weather = ({ fahrenheit, weatherData }) => {
   const [newWeatherState, setNewWeatherState] = useState(weatherData)
   const [weatherState, setWeatherState] = useState({
     loaded: false,
@@ -65,7 +65,6 @@ const Weather = ({ weatherData }) => {
   }
 
   useEffect(() => {
-    console.log(weatherData)
     parseWeatherData()
   }, [newWeatherState])
 
@@ -75,7 +74,7 @@ const Weather = ({ weatherData }) => {
 
   return (
     <div>
-      <WeatherDisplay data={weatherState}/>
+      <WeatherDisplay fahrenheit={fahrenheit} data={weatherState}/>
     </div>
   )
 }
