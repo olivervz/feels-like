@@ -13,12 +13,17 @@ yarn.lock
 /coverage
 
 # production
-/build
+client/build
+
+# hosting
+client/.firebase/
+client/.firebaserc
+client/firebase.json
 
 # misc
 .DS_Store
 package-lock.json
-/client/.env
+client/.env
 .env.local
 .env.development.local
 .env.test.local
